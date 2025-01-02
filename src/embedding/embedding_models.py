@@ -1,4 +1,3 @@
-# src/embedding/embedding_models.py
 from abc import ABC, abstractmethod
 from typing import List
 import numpy as np
@@ -18,7 +17,7 @@ class SentenceTransformersEmbedding(EmbeddingModel):
         return self.model.encode(texts)
 
 class OpenAIEmbedding(EmbeddingModel):
-    def __init__(self, api_key: str, model_name: str = "text-embedding-3-small"):
+    def __init__(self, api_key: str, model_name: str = "text-embedding-3-large"):
         import openai
         openai.api_key = api_key
         self.model_name = model_name
@@ -29,9 +28,9 @@ class OpenAIEmbedding(EmbeddingModel):
         return response.data[0].embedding
 
     def encode(self, texts: List[str]) -> np.ndarray:
-        embeddings = []
+        embeddings_list = []
         with ThreadPoolExecutor() as executor:
             futures = [executor.submit(self._get_embedding, text) for text in texts]
             for future in futures:
-                embeddings.append(future.result())
-        return np.array(embeddings)
+                embeddings_list.append(future.result())
+        return np.array(embeddings_list, , dtype=np.float32)

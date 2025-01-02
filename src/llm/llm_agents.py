@@ -39,7 +39,6 @@ class OpenAILLMAgent(LLMAgentInterface):
                     {"role": "system", "content": "You are a helpful assistant."},
                     {"role": "user", "content": prompt}
                 ],
-                temperature=0.0,  # For more deterministic answers
             )
             return response.choices[0].message.content.strip()
         except Exception as e:

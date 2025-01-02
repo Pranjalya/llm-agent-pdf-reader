@@ -2,8 +2,8 @@ import os
 import json
 from src.config import settings
 from src.document_processing.pdf_processor import PDFProcessor
-from src.embedding.embedding_models import SentenceTransformersEmbedding
-from src.llm.llm_agents import GeminiLLMAgent
+from src.embedding.embedding_models import OpenAIEmbedding
+from src.llm.llm_agents import OpenAILLMAgent
 from src.retrieval.vector_store import FAISSVectorStore
 from src.question_answering.qa_agent import QuestionAnswerer
 from src.utils.logger import setup_logger
@@ -29,14 +29,14 @@ def main():
     pdf_processor = PDFProcessor(pdf_file)
     chunks = pdf_processor.load_and_chunk()
 
-    embedding_model = SentenceTransformersEmbedding(settings.EMBEDDING_MODEL_NAME)
+    embedding_model = OpenAIEmbedding(settings.OPENAI_API_KEY, settings.OPENAI_EMBEDDING_MODEL_NAME)
     embeddings = embedding_model.encode(chunks)
 
     # Initialize Vector Store
     vector_store = FAISSVectorStore(embeddings.shape[1])
     vector_store.add_embeddings(chunks, embeddings)
 
-    llm_agent = GeminiLLMAgent(api_key=settings.GEMINI_API_KEY)
+    llm_agent = OpenAILLMAgent(api_key=settings.OPENAI_API_KEY, model_name=settings.OPENAI_LLM_MODEL_NAME)
 
     qa_agent = QuestionAnswerer(embedding_model, llm_agent, vector_store, pdf_processor)
     results = qa_agent.answer_questions(questions)
