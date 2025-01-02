@@ -1,6 +1,6 @@
 ## Ways to Improve the Application
 
-**Improving Accuracy:**
+### Improving Accuracy:
 
 *   **Advanced Chunking Strategies:**
     *   Implement more sophisticated chunking techniques, such as semantic chunking or sliding window approaches, to better capture context.
@@ -23,7 +23,7 @@
 *   **Reranking with More Sophisticated Models:**
     *   Explore more advanced reranking models or techniques beyond basic cross-encoders.
 
-**Improving Modularity, Scalability, and Production Readiness:**
+### Improving Modularity, Scalability, and Production Readiness:
 
 *   **Decoupled Components with Interfaces:**
     *   Define interfaces for each component (e.g., `DocumentLoader`, `Embedder`, `LLM`, `VectorDB`). This makes it easier to swap out implementations without affecting other parts of the system.
@@ -31,7 +31,7 @@
     *   Decompose the application into smaller, independent microservices such as a service for document processing, one for embedding, and one for querying. This helps in scalability and maintainability.
 *   **Asynchronous Processing:**
     *   Long-running operations like PDF processing and embedding are done using asynchronous tasks to enhance responsiveness.
-*   **Containerization (Docker):
+*   **Containerization (Docker)**:
     *   Package the application and its dependencies in Docker containers so deployment is uniform across environments.
 *   **Orchestration (Kubernetes):**
     *   Use Kubernetes to manage and scale containerized services
@@ -41,7 +41,7 @@
     *   Use tools like Prometheus, Grafana, and Elasticsearch to monitor performance and identify issues.
 *   **API Endpoints:**
     *   Expose the application's functionality through well-defined API endpoints (e.g., using FastAPI or Flask) for integration with other systems.
-*   **Caching Mechanisms:
+*   **Caching Mechanisms**:
     *   Cache frequently accessed data, such as embeddings and processed chunks, to speed up processing and lighten the load on downstream services.
 *   **Rate Limiting and Authentication:**
     *   Implement rate limiting and authentication to protect the API and manage usage.
