@@ -4,7 +4,7 @@ from src.config import settings
 from src.document_processing.pdf_processor import PDFProcessor
 from src.embedding.embedding_models import SentenceTransformersEmbedding
 from src.llm.llm_agents import GeminiLLMAgent
-from src.retrieval.faiss_store import FAISSVectorStore
+from src.retrieval.vector_store import FAISSVectorStore
 from src.question_answering.qa_agent import QuestionAnswerer
 from src.utils.logger import setup_logger
 
