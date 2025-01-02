@@ -4,7 +4,7 @@ from typing import List
 from docling.document_converter import DocumentConverter
 from docling.chunking import HybridChunker
 from docling_core.transforms.chunker.hierarchical_chunker import DocChunk
-from docling_core.types.doc.document import Document, TextItem
+from docling_core.types.doc.document import DoclingDocument, TextItem
 
 from src.config import settings
 from src.utils.logger import setup_logger
@@ -15,9 +15,9 @@ class PDFProcessor:
     """Handles PDF document processing."""
     def __init__(self, pdf_path: str):
         self.pdf_path = pdf_path
-        self.text_content: Document | None = None
+        self.text_content: DoclingDocument | None = None
         self.chunker = None
-        self.chunks = List[DocChunk] | None = None
+        self.chunks: List[DocChunk] | None = None
 
     def load_and_chunk(self) -> List[str]:
         """Loads the PDF and chunks the text."""
@@ -47,7 +47,7 @@ class PDFProcessor:
         if self.chunker and self.text_content:
             chunk_iter = self.chunker.chunk(dl_doc=self.text_content)
             self.chunks = list(chunk_iter)
-            return list(map(self.get_chunk_with_title, chunks))
+            return list(map(self.get_chunk_with_title, self.chunks))
         return []
 
     def get_origin_text_from_chunk(self, chunk: DocChunk) -> str:

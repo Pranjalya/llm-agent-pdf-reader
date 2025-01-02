@@ -4,3 +4,4 @@ sentence-transformers
 faiss-cpu
 python-dotenv
 transformers
+openai
