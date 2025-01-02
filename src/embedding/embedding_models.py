@@ -33,4 +33,4 @@ class OpenAIEmbedding(EmbeddingModel):
             futures = [executor.submit(self._get_embedding, text) for text in texts]
             for future in futures:
                 embeddings_list.append(future.result())
-        return np.array(embeddings_list, , dtype=np.float32)
+        return np.array(embeddings_list, dtype=np.float32)
