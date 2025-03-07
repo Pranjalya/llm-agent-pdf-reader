@@ -1,4 +1,4 @@
-# llm-agent-pdf-reader
+# Autonomous Agentic PDF Q/A Tool
 
 **A Python-based LLM Agent for Question Answering on PDF Documents**
 
